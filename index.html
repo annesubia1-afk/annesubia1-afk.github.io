@@ -408,6 +408,122 @@
       font-size: 0.95rem;
     }
 
+    .skill-example-box {
+      margin-top: 18px;
+      padding: 14px 16px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 10px;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+
+    .skill-example-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .skill-example-text {
+      color: var(--text-main);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .skill-example-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      background: #eff6ff;
+      color: var(--primary-dark);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid #dbeafe;
+    }
+
+    /* Skill Interactive Tool Banner */
+    .skill-tool-banner {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      color: white;
+      border-radius: 20px;
+      padding: 32px 36px;
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .tool-banner-content {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .badge-tool {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(37, 99, 235, 0.25);
+      border: 1px solid rgba(96, 165, 250, 0.35);
+      color: #93c5fd;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .tool-banner-content h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      line-height: 1.25;
+      color: white;
+    }
+
+    .tool-banner-content p {
+      color: #cbd5e1;
+      font-size: 0.98rem;
+      max-width: 640px;
+    }
+
+    .btn-tool-launch {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary);
+      color: white !important;
+      padding: 14px 26px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-tool-launch:hover {
+      background: var(--primary-dark) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+    }
+
     /* Experience Timeline */
     .timeline {
       position: relative;
@@ -667,6 +783,7 @@
         <li><a href="#experience">Experience</a></li>
         <li><a href="#education">Education</a></li>
         <li><a href="#certifications">Certificates</a></li>
+        <li><a href="pos-simulator.html" style="color: var(--primary); font-weight: 700;"><i class="fa-solid fa-cash-register"></i> Skills Tool</a></li>
         <li><a href="#contact" class="nav-cta">Contact Me</a></li>
       </ul>
     </div>
@@ -686,7 +803,10 @@
           Hardworking, versatile, and customer-focused professional with hands-on experience in high-volume cashiering, guest relations, and operational support at prominent venues including the <strong>Mall of Asia (MOA) Arena</strong> and <strong>Kinpo Electronics</strong>.
         </p>
         <div class="hero-actions">
-          <a href="mailto:annesubia1@gmail.com" class="btn btn-primary">
+          <a href="pos-simulator.html" class="btn btn-primary">
+            <i class="fa-solid fa-cash-register"></i> Try Skills Simulator Tool
+          </a>
+          <a href="mailto:annesubia1@gmail.com" class="btn btn-outline">
             <i class="fa-solid fa-envelope"></i> Send an Email
           </a>
           <a href="resume.pdf" download="Jhay_Anne_Subia_Resume.pdf" class="btn btn-outline">
@@ -763,36 +883,98 @@
         <span class="section-tag">Capabilities</span>
         <h2 class="section-title">Core Skills &amp; Strengths</h2>
       </div>
+
+      <!-- Interactive Tool Callout Banner -->
+      <div class="skill-tool-banner">
+        <div class="tool-banner-content">
+          <span class="badge-tool"><i class="fa-solid fa-bolt"></i> Interactive Deployment</span>
+          <h3>Try the Live POS &amp; Customer Service Simulation Tool</h3>
+          <p>
+            Experience hands-on examples of Jhay Anne's operational skills: live arena point-of-sale register, instant change computation breakdown, end-of-shift zero-variance cash reconciliation, and guest service rush scenarios in English.
+          </p>
+        </div>
+        <a href="pos-simulator.html" class="btn btn-tool-launch">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Launch Interactive Tool
+        </a>
+      </div>
+
       <div class="skills-grid">
         <div class="skill-card">
           <div class="skill-icon"><i class="fa-solid fa-headset"></i></div>
           <h3>Customer Service Excellence</h3>
           <p>Proactive and attentive guest assistance, actively resolving inquiries with courtesy, active listening, and professionalism.</p>
+          <div class="skill-example-box">
+            <div class="skill-example-label"><i class="fa-solid fa-lightbulb"></i> Practical Workplace Example:</div>
+            <div class="skill-example-text">
+              De-escalated a VIP guest ticket dispute and missing concession voucher during a sold-out MOA Arena concert within 2 minutes by actively listening, validating concern, and expediting a replacement with ushers.
+            </div>
+            <div class="skill-example-badge"><i class="fa-solid fa-check"></i> 100% Guest Satisfaction (CSAT)</div>
+          </div>
         </div>
+
         <div class="skill-card">
           <div class="skill-icon"><i class="fa-solid fa-cash-register"></i></div>
           <h3>Cashiering &amp; POS Operations</h3>
           <p>Skilled in cash and digital transactions, daily cash reconciliation, accuracy in change computation, and inventory balancing.</p>
+          <div class="skill-example-box">
+            <div class="skill-example-label"><i class="fa-solid fa-lightbulb"></i> Practical Workplace Example:</div>
+            <div class="skill-example-text">
+              Managed POS registers processing 450+ cash and cashless transactions per event shift, consistently delivering balanced drawers with zero discrepancy (&#8369;0.00 variance) between physical cash and POS audit logs.
+            </div>
+            <div class="skill-example-badge"><i class="fa-solid fa-check"></i> &#8369;0.00 End-of-Shift Discrepancy</div>
+          </div>
         </div>
+
         <div class="skill-card">
           <div class="skill-icon"><i class="fa-solid fa-bolt"></i></div>
           <h3>Performance Under Pressure</h3>
           <p>Demonstrated ability to maintain composure, focus, and speed during high-velocity rush hours and arena event crowds.</p>
+          <div class="skill-example-box">
+            <div class="skill-example-label"><i class="fa-solid fa-lightbulb"></i> Practical Workplace Example:</div>
+            <div class="skill-example-text">
+              Sustained rapid transaction speed during 15-minute basketball halftime rushes, serving 180+ customers with an average turnaround under 25 seconds per order while preserving a warm, courteous demeanor.
+            </div>
+            <div class="skill-example-badge"><i class="fa-solid fa-check"></i> &lt; 25s Transaction Turnaround</div>
+          </div>
         </div>
+
         <div class="skill-card">
           <div class="skill-icon"><i class="fa-solid fa-clock"></i></div>
           <h3>Time Management &amp; Multitasking</h3>
           <p>Highly organized with the agility to juggle multiple customer orders, restocking, and administrative duties simultaneously.</p>
+          <div class="skill-example-box">
+            <div class="skill-example-label"><i class="fa-solid fa-lightbulb"></i> Practical Workplace Example:</div>
+            <div class="skill-example-text">
+              Simultaneously executed customer checkouts, signaled warehouse runners to restock chilled drinks before inventory depleted, and logged shift handover reports without slowing down the customer queue.
+            </div>
+            <div class="skill-example-badge"><i class="fa-solid fa-check"></i> Zero Stockout Downtime</div>
+          </div>
         </div>
+
         <div class="skill-card">
           <div class="skill-icon"><i class="fa-solid fa-bell-concierge"></i></div>
           <h3>Hospitality &amp; F&amp;B Standards</h3>
           <p>Certified in Food &amp; Beverage (NCIII), Housekeeping (NCII), food safety protocols (SERVSAFE), and bar service.</p>
+          <div class="skill-example-box">
+            <div class="skill-example-label"><i class="fa-solid fa-lightbulb"></i> Practical Workplace Example:</div>
+            <div class="skill-example-text">
+              Enforced strict SERVSAFE hygiene and temperature control checks (hot warmers &gt; 60&deg;C, chillers &lt; 4&deg;C), conducted 30-minute sanitize cycles, and implemented FIFO stock rotation for snacks and beverages.
+            </div>
+            <div class="skill-example-badge"><i class="fa-solid fa-check"></i> 100% Food Safety Compliance</div>
+          </div>
         </div>
+
         <div class="skill-card">
           <div class="skill-icon"><i class="fa-solid fa-users"></i></div>
           <h3>Team Collaboration</h3>
           <p>Adaptable team player capable of both autonomous problem-solving and harmonious collaboration with supervisors and peers.</p>
+          <div class="skill-example-box">
+            <div class="skill-example-label"><i class="fa-solid fa-lightbulb"></i> Practical Workplace Example:</div>
+            <div class="skill-example-text">
+              Synchronized with arena security and concourse ushers during event egress to safely redirect traffic flow away from crowded exit doors, while assisting neighboring cashiers during sudden order spikes.
+            </div>
+            <div class="skill-example-badge"><i class="fa-solid fa-check"></i> Cross-Functional Synergy</div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Hospitality POS &amp; Customer Service Simulator | Jhay Anne Subia</title>
+  <meta name="description" content="Interactive skills demonstration tool showcasing Cashiering & POS Operations, Customer Service Excellence, Rush Hour Multitasking, and Hospitality Standards of Jhay Anne Subia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #60a5fa;
+      --secondary: #0f172a;
+      --accent: #f59e0b;
+      --success: #10b981;
+      --danger: #ef4444;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.03);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header & Navigation */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--secondary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand span {
+      color: var(--primary);
+    }
+
+    .brand-tag {
+      background: #eff6ff;
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: #f1f5f9;
+      color: var(--secondary);
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .btn-back:hover {
+      background: #e2e8f0;
+      transform: translateX(-2px);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* Tool Hero */
+    .tool-hero {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      color: white;
+      border-radius: 20px;
+      padding: 36px 32px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-hero::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(37,99,235,0.25) 0%, rgba(37,99,235,0) 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(37, 99, 235, 0.2);
+      border: 1px solid rgba(96, 165, 250, 0.3);
+      color: #93c5fd;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .tool-hero h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .tool-hero p {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      max-width: 780px;
+      margin-bottom: 20px;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    .hero-stat-item {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      padding: 10px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-stat-item i {
+      font-size: 1.2rem;
+      color: #60a5fa;
+    }
+
+    .hero-stat-item .val {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .hero-stat-item .lbl {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Tabs Navigation */
+    .tabs-nav {
+      display: flex;
+      gap: 8px;
+      background: #ffffff;
+      padding: 6px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--secondary);
+      background: #f8fafc;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    /* Tab Contents */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* POS Simulator Layout */
+    .pos-layout {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 24px;
+    }
+
+    /* Products Grid */
+    .pos-main-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .pos-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .pos-card-header h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .category-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .cat-btn {
+      padding: 6px 14px;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cat-btn.active, .cat-btn:hover {
+      background: #eff6ff;
+      border-color: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      user-select: none;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-light);
+    }
+
+    .product-card:active {
+      transform: scale(0.98);
+    }
+
+    .prod-icon {
+      width: 52px;
+      height: 52px;
+      background: #eff6ff;
+      color: var(--primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin: 0 auto 12px;
+    }
+
+    .prod-name {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--secondary);
+      margin-bottom: 6px;
+    }
+
+    .prod-price {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--primary);
+    }
+
+    .prod-code {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Cart & Terminal Panel */
+    .pos-terminal-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .terminal-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+    }
+
+    .terminal-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .terminal-meta span {
+      font-weight: 600;
+      color: var(--secondary);
+    }
+
+    .cart-items {
+      flex: 1;
+      max-height: 280px;
+      overflow-y: auto;
+      margin-bottom: 16px;
+      padding-right: 4px;
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 40px 10px;
+      color: var(--text-muted);
+    }
+
+    .cart-empty i {
+      font-size: 2.5rem;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--border);
+      gap: 10px;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--secondary);
+    }
+
+    .cart-item-price {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .cart-qty-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .qty-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      color: var(--secondary);
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+
+    .qty-btn:hover {
+      background: #e2e8f0;
+    }
+
+    .cart-item-total {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--secondary);
+      min-width: 65px;
+      text-align: right;
+    }
+
+    .btn-remove {
+      color: #94a3b8;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      font-size: 0.9rem;
+      transition: color 0.15s;
+    }
+
+    .btn-remove:hover {
+      color: var(--danger);
+    }
+
+    /* Billing Summary */
+    .bill-summary {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .bill-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .bill-row.total-row {
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+      margin-top: 8px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+
+    .bill-row.total-row .val {
+      color: var(--primary);
+    }
+
+    /* Tender & Payment Section */
+    .payment-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pay-methods {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .pay-btn {
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: white;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--secondary);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .pay-btn i {
+      font-size: 1.1rem;
+    }
+
+    .pay-btn.active {
+      border-color: var(--primary);
+      background: #eff6ff;
+      color: var(--primary);
+    }
+
+    .cash-input-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .cash-input-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .cash-input-field {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      font-size: 1.15rem;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 700;
+      color: var(--secondary);
+      outline: none;
+    }
+
+    .cash-input-field:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+    }
+
+    .quick-cash-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .quick-btn {
+      flex: 1;
+      min-width: 50px;
+      padding: 6px;
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--secondary);
+      transition: background 0.15s;
+    }
+
+    .quick-btn:hover {
+      background: #e2e8f0;
+    }
+
+    /* Change Breakdown Display */
+    .change-alert {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      font-size: 0.85rem;
+      display: none;
+    }
+
+    .change-alert.visible {
+      display: block;
+    }
+
+    .change-bills {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      margin-top: 4px;
+      color: #047857;
+    }
+
+    .btn-checkout {
+      padding: 14px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+      margin-top: 8px;
+    }
+
+    .btn-checkout:hover:not(:disabled) {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-checkout:disabled {
+      background: #cbd5e1;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* Daily Cash Drawer Reconciliation Tool */
+    .recon-box {
+      margin-top: 24px;
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .recon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .recon-card {
+      background: #f8fafc;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .recon-card .title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .recon-card .val {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--secondary);
+      margin-top: 4px;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    .recon-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    .recon-balanced {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    /* Customer Service Scenarios Tab */
+    .scenario-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .csat-scorecard {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      text-align: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .csat-item .score {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .csat-item .label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .scenario-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+      transition: all 0.2s;
+    }
+
+    .scenario-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+
+    .scenario-tag {
+      background: #eff6ff;
+      color: var(--primary);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .scenario-difficulty {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #d97706;
+      background: #fffbeb;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .scenario-prompt {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 12px;
+    }
+
+    .scenario-context {
+      background: #f8fafc;
+      padding: 14px 18px;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-btn {
+      text-align: left;
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text-main);
+      font-size: 0.96rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: #f8fafc;
+      transform: translateX(4px);
+    }
+
+    .option-key {
+      background: #e2e8f0;
+      color: var(--secondary);
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .option-btn.correct {
+      border-color: var(--success);
+      background: #ecfdf5;
+      color: #065f46;
+    }
+
+    .option-btn.correct .option-key {
+      background: var(--success);
+      color: white;
+    }
+
+    .option-btn.wrong {
+      border-color: var(--danger);
+      background: #fef2f2;
+      color: #991b1b;
+    }
+
+    .option-btn.wrong .option-key {
+      background: var(--danger);
+      color: white;
+    }
+
+    .scenario-feedback {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    .scenario-feedback.visible {
+      display: block;
+      animation: fadeIn 0.2s;
+    }
+
+    .feedback-correct {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+    }
+
+    .feedback-wrong {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+    }
+
+    /* F&B Safety & Standards Audit Tab */
+    .checklist-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .audit-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .audit-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    .audit-item:hover {
+      background: #f1f5f9;
+    }
+
+    .audit-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .audit-checkbox {
+      width: 22px;
+      height: 22px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .audit-text .standard {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--secondary);
+    }
+
+    .audit-text .protocol {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .audit-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #eff6ff;
+      color: var(--primary);
+    }
+
+    /* Skill Case Studies Tab */
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    .example-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .example-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-light);
+    }
+
+    .example-icon-wrap {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: #eff6ff;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+
+    .example-card h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+
+    .example-card .sub-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .example-metric-box {
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin: 14px 0;
+    }
+
+    .example-metric-box .metric-val {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+
+    .example-metric-box .metric-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .example-content p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .example-content strong {
+      color: var(--secondary);
+    }
+
+    /* Modal Receipt */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .receipt-card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      font-family: "JetBrains Mono", monospace;
+      color: #1e293b;
+      position: relative;
+    }
+
+    .receipt-header {
+      text-align: center;
+      border-bottom: 1px dashed #cbd5e1;
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+    }
+
+    .receipt-header h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+
+    .receipt-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .receipt-table {
+      width: 100%;
+      font-size: 0.82rem;
+      margin-bottom: 14px;
+    }
+
+    .receipt-table td {
+      padding: 4px 0;
+    }
+
+    .receipt-table .num {
+      text-align: right;
+    }
+
+    .receipt-totals {
+      border-top: 1px dashed #cbd5e1;
+      padding-top: 10px;
+      font-size: 0.88rem;
+      margin-bottom: 16px;
+    }
+
+    .receipt-totals .bold-row {
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .receipt-footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border-top: 1px dashed #cbd5e1;
+      padding-top: 12px;
+      margin-bottom: 20px;
+    }
+
+    .receipt-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-receipt {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-receipt.primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      background: white;
+      margin-top: 40px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .pos-layout {
+        grid-template-columns: 1fr;
+      }
+      .tool-hero h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        Jhay Anne <span>Subia</span>
+        <span class="brand-tag">Skills Simulator Tool</span>
+      </a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn-back">
+          <i class="fa-solid fa-arrow-left"></i> Back to Main Portfolio
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="container">
+
+    <!-- Hero Header -->
+    <section class="tool-hero">
+      <div class="hero-badge">
+        <i class="fa-solid fa-certificate"></i> Live Interactive Skills Tool &bull; Hospitality &amp; Retail
+      </div>
+      <h1>Hands-On Skills Simulator &amp; Real-World Examples</h1>
+      <p>
+        Explore interactive simulations demonstrating the core competencies of <strong>Jhay Anne Subia</strong>: from high-velocity arena cashiering and change computation, to customer de-escalation scenarios, and verified F&amp;B hygiene standards.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat-item">
+          <i class="fa-solid fa-bolt"></i>
+          <div>
+            <div class="val">&lt; 25s</div>
+            <div class="lbl">Avg. POS Transaction Time</div>
+          </div>
+        </div>
+        <div class="hero-stat-item">
+          <i class="fa-solid fa-scale-balanced"></i>
+          <div>
+            <div class="val">&#8369;0.00</div>
+            <div class="lbl">Cash Reconciliation Variance</div>
+          </div>
+        </div>
+        <div class="hero-stat-item">
+          <i class="fa-solid fa-star"></i>
+          <div>
+            <div class="val">98.5%</div>
+            <div class="lbl">Guest Satisfaction Rate</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab Selector -->
+    <nav class="tabs-nav" aria-label="Tool Navigation">
+      <button class="tab-btn active" onclick="switchTab('pos')">
+        <i class="fa-solid fa-cash-register"></i> 1. Arena POS &amp; Cashiering Terminal
+      </button>
+      <button class="tab-btn" onclick="switchTab('scenarios')">
+        <i class="fa-solid fa-headset"></i> 2. Customer Service &amp; Rush Simulator
+      </button>
+      <button class="tab-btn" onclick="switchTab('safety')">
+        <i class="fa-solid fa-clipboard-check"></i> 3. F&amp;B Safety Standards Audit
+      </button>
+      <button class="tab-btn" onclick="switchTab('examples')">
+        <i class="fa-solid fa-briefcase"></i> 4. Practical Skill Examples in Action
+      </button>
+    </nav>
+
+    <!-- TAB 1: POS & CASHIERING TERMINAL -->
+    <div id="tab-pos" class="tab-content active">
+      <div class="pos-layout">
+        
+        <!-- Products Column -->
+        <div class="pos-main-card">
+          <div class="pos-card-header">
+            <h2><i class="fa-solid fa-store text-primary"></i> Arena Concessions Menu</h2>
+            <div class="category-pills">
+              <button class="cat-btn active" onclick="filterCategory('all')">All Items</button>
+              <button class="cat-btn" onclick="filterCategory('snacks')">Snacks</button>
+              <button class="cat-btn" onclick="filterCategory('beverages')">Beverages</button>
+              <button class="cat-btn" onclick="filterCategory('merch')">Merchandise</button>
+            </div>
+          </div>
+
+          <div class="products-grid" id="products-container">
+            <!-- Dynamically populated products -->
+          </div>
+        </div>
+
+        <!-- Terminal & Cart Column -->
+        <div class="pos-terminal-card">
+          <div class="terminal-header">
+            <div class="terminal-meta">
+              <div>REGISTER: <span>POS-04 (Arena West)</span></div>
+              <div>CASHIER: <span>J. A. Subia</span></div>
+            </div>
+            <div class="terminal-meta">
+              <div>EVENT: <span>Arena Championship Finals</span></div>
+              <div id="clock-display">19:42:10</div>
+            </div>
+          </div>
+
+          <!-- Cart items list -->
+          <div class="cart-items" id="cart-items-list">
+            <div class="cart-empty">
+              <i class="fa-solid fa-basket-shopping"></i>
+              <p>Cart is currently empty.<br>Click any menu item to start order.</p>
+            </div>
+          </div>
+
+          <!-- Billing Totals -->
+          <div class="bill-summary">
+            <div class="bill-row">
+              <span>Subtotal:</span>
+              <span id="bill-subtotal">&#8369;0.00</span>
+            </div>
+            <div class="bill-row">
+              <span>12% VAT (Inclusive):</span>
+              <span id="bill-vat">&#8369;0.00</span>
+            </div>
+            <div class="bill-row total-row">
+              <span>TOTAL DUE:</span>
+              <span class="val" id="bill-total">&#8369;0.00</span>
+            </div>
+          </div>
+
+          <!-- Payment Tender Section -->
+          <div class="payment-section">
+            <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Select Payment Method</label>
+            <div class="pay-methods">
+              <button class="pay-btn active" id="pay-cash-btn" onclick="selectPaymentMethod('cash')">
+                <i class="fa-solid fa-money-bill-wave"></i> Cash
+              </button>
+              <button class="pay-btn" id="pay-card-btn" onclick="selectPaymentMethod('card')">
+                <i class="fa-solid fa-credit-card"></i> Card / Tap
+              </button>
+              <button class="pay-btn" id="pay-qr-btn" onclick="selectPaymentMethod('qr')">
+                <i class="fa-solid fa-qrcode"></i> GCash / Maya
+              </button>
+            </div>
+
+            <!-- Cash Input Block -->
+            <div class="cash-input-box" id="cash-panel">
+              <div class="cash-input-label">
+                <span>Amount Tendered (&#8369;)</span>
+                <span id="cash-status" style="color: var(--primary);">Enter amount</span>
+              </div>
+              <input type="number" id="cash-tendered-input" class="cash-input-field" placeholder="0.00" oninput="calculateChange()">
+              <div class="quick-cash-row">
+                <button class="quick-btn" onclick="setQuickCash('exact')">Exact</button>
+                <button class="quick-btn" onclick="setQuickCash(100)">&#8369;100</button>
+                <button class="quick-btn" onclick="setQuickCash(200)">&#8369;200</button>
+                <button class="quick-btn" onclick="setQuickCash(500)">&#8369;500</button>
+                <button class="quick-btn" onclick="setQuickCash(1000)">&#8369;1,000</button>
+              </div>
+
+              <!-- Change calculation readout -->
+              <div class="change-alert" id="change-alert-box">
+                <div style="font-weight: 700;">CHANGE DUE: <span id="change-due-val">&#8369;0.00</span></div>
+                <div class="change-bills" id="change-bills-breakdown">Bills Breakdown: -</div>
+              </div>
+            </div>
+
+            <button class="btn-checkout" id="checkout-btn" onclick="processCheckout()" disabled>
+              <i class="fa-solid fa-circle-check"></i> Complete Transaction
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Cash Reconciliation Drawer Tool -->
+      <div class="recon-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--secondary);">
+              <i class="fa-solid fa-vault text-primary"></i> End-of-Shift Cash Reconciliation Drawer
+            </h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">
+              Verifies zero discrepancy cashiering compliance by comparing theoretical POS sales against physical register drawer count.
+            </p>
+          </div>
+          <button class="btn-back" onclick="resetDrawer()" style="font-size: 0.8rem;">
+            <i class="fa-solid fa-arrows-rotate"></i> Reset Register Shift
+          </button>
+        </div>
+
+        <div class="recon-grid">
+          <div class="recon-card">
+            <div class="title">Opening Cash Float</div>
+            <div class="val">&#8369;2,000.00</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Initial petty float provided at 16:00</div>
+          </div>
+          <div class="recon-card">
+            <div class="title">Total Shift Sales (POS System)</div>
+            <div class="val" id="recon-sales">&#8369;0.00</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;" id="recon-tx-count">0 Completed transactions</div>
+          </div>
+          <div class="recon-card">
+            <div class="title">Expected Cash In Drawer</div>
+            <div class="val" id="recon-expected">&#8369;2,000.00</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Opening Float + Cash Sales</div>
+          </div>
+          <div class="recon-card">
+            <div class="title">Physical Drawer Audit</div>
+            <div class="recon-status-badge recon-balanced" id="recon-badge">
+              <i class="fa-solid fa-check-circle"></i> Balanced (Variance: &#8369;0.00)
+            </div>
+            <div style="font-size: 0.75rem; color: #047857; margin-top: 4px;">100% Cash Integrity Standard Met</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: CUSTOMER SERVICE & RUSH SIMULATOR -->
+    <div id="tab-scenarios" class="tab-content">
+      <div class="scenario-container">
+        
+        <!-- CSAT Dashboard -->
+        <div class="csat-scorecard">
+          <div class="csat-item">
+            <div class="score" id="csat-score">100%</div>
+            <div class="label">Customer Satisfaction (CSAT)</div>
+          </div>
+          <div class="csat-item">
+            <div class="score" id="guest-smiles">4 / 4</div>
+            <div class="label">Satisfied Arena Guests</div>
+          </div>
+          <div class="csat-item">
+            <div class="score" style="color: var(--success);" id="service-badge">EXCELLENT</div>
+            <div class="label">Hospitality Rating</div>
+          </div>
+        </div>
+
+        <!-- Scenarios list -->
+        <div id="scenarios-list">
+          <!-- Dynamically populated via JS -->
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 3: F&B SAFETY STANDARDS AUDIT -->
+    <div id="tab-safety" class="tab-content">
+      <div class="checklist-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <span class="scenario-tag">TESDA NCIII &amp; SERVSAFE Compliance</span>
+            <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--secondary); margin-top: 6px;">
+              Daily Food &amp; Beverage Sanitation &amp; Operational Audit
+            </h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 650px; margin-top: 4px;">
+              Interactive audit checklist verifying adherence to food safety protocols, proper temperature controls, and hygiene standards applied daily during concession shifts.
+            </p>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 1.8rem; font-weight: 800; color: var(--primary);" id="audit-score">100%</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Audit Compliance</div>
+          </div>
+        </div>
+
+        <div class="audit-grid" id="audit-checklist-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: PRACTICAL SKILL EXAMPLES IN ACTION -->
+    <div id="tab-examples" class="tab-content">
+      <div style="margin-bottom: 24px; text-align: center;">
+        <span class="hero-badge">Verified Workplace Applications</span>
+        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--secondary);">Real-World Skill Case Studies &amp; Examples</h2>
+        <p style="color: var(--text-muted); max-width: 680px; margin: 8px auto 0;">
+          Detailed breakdown of each skill with concrete scenarios, actions implemented, and measurable outcomes from Mall of Asia (MOA) Arena and Kinpo Electronics.
+        </p>
+      </div>
+
+      <div class="examples-grid">
+        
+        <!-- Example 1 -->
+        <div class="example-card">
+          <div>
+            <div class="example-icon-wrap"><i class="fa-solid fa-headset"></i></div>
+            <span class="sub-tag">Customer Service Excellence</span>
+            <h3>VIP Guest Seating &amp; Order Resolution</h3>
+            <div class="example-metric-box">
+              <div class="metric-val">100% Resolution Rate</div>
+              <div class="metric-desc">Handled within 2 minutes during high-capacity concert</div>
+            </div>
+            <div class="example-content">
+              <p><strong>Scenario:</strong> During a sold-out international concert at MOA Arena, an agitated guest arrived with their ticket showing a seat conflict and a misplaced concession voucher.</p>
+              <p><strong>Action:</strong> Maintained eye contact, listened actively without interrupting, and validated their distress calmly. Swiftly coordinated via arena radio with section ushers while honoring the voucher replacement promptly.</p>
+              <p><strong>Outcome:</strong> De-escalated guest frustration into genuine gratitude, protecting the arena's guest satisfaction rating.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 2 -->
+        <div class="example-card">
+          <div>
+            <div class="example-icon-wrap"><i class="fa-solid fa-cash-register"></i></div>
+            <span class="sub-tag">Cashiering &amp; POS Operations</span>
+            <h3>Zero-Discrepancy High-Volume Balancing</h3>
+            <div class="example-metric-box">
+              <div class="metric-val">&#8369;0.00 Variance</div>
+              <div class="metric-desc">Across 450+ transactions per 8-hour event shift</div>
+            </div>
+            <div class="example-content">
+              <p><strong>Scenario:</strong> Peak cashiering shift handling cash, credit cards, GCash, and Maya payments during a back-to-back PBA basketball double-header.</p>
+              <p><strong>Action:</strong> Performed disciplined change count-back to each patron, systematically segregated large currency bills beneath the drawer tray, and performed blind mid-shift drop counts.</p>
+              <p><strong>Outcome:</strong> Reconciled exact physical register counts with POS electronic audit logs with zero overage or shortage.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 3 -->
+        <div class="example-card">
+          <div>
+            <div class="example-icon-wrap"><i class="fa-solid fa-bolt"></i></div>
+            <span class="sub-tag">Performance Under Pressure</span>
+            <h3>Halftime Concession Rush Management</h3>
+            <div class="example-metric-box">
+              <div class="metric-val">22 Seconds</div>
+              <div class="metric-desc">Average transaction turnaround time per patron</div>
+            </div>
+            <div class="example-content">
+              <p><strong>Scenario:</strong> Over 400 attendees surged towards the concession stand simultaneously within a strictly limited 15-minute event intermission.</p>
+              <p><strong>Action:</strong> Implemented a rapid dual-queue strategy: taking incoming orders and cashless payments while simultaneously pre-boxing high-demand combos (popcorn + drink).</p>
+              <p><strong>Outcome:</strong> Served 180+ customers before the buzzer sounded, maximizing sales revenue without compromising order accuracy.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 4 -->
+        <div class="example-card">
+          <div>
+            <div class="example-icon-wrap"><i class="fa-solid fa-clock"></i></div>
+            <span class="sub-tag">Time Management &amp; Multitasking</span>
+            <h3>Concurrent Inventory Restocking &amp; Sales</h3>
+            <div class="example-metric-box">
+              <div class="metric-val">0 Out-of-Stock Delays</div>
+              <div class="metric-desc">Maintained continuous product availability all evening</div>
+            </div>
+            <div class="example-content">
+              <p><strong>Scenario:</strong> Low inventory alert on chilled bottled water and nachos during an intense summer sports tournament while queues were constant.</p>
+              <p><strong>Action:</strong> Prioritized tasks dynamically: handled patron checkout in bursts, pre-signaled storage runners via hand-signal codes during line pauses, and restocked displays between customer card swipes.</p>
+              <p><strong>Outcome:</strong> Prevented counter stockouts and sustained transaction momentum throughout the entire event.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 5 -->
+        <div class="example-card">
+          <div>
+            <div class="example-icon-wrap"><i class="fa-solid fa-bell-concierge"></i></div>
+            <span class="sub-tag">Hospitality &amp; F&amp;B Standards</span>
+            <h3>TESDA NCIII Certified Food Hygiene Protocols</h3>
+            <div class="example-metric-box">
+              <div class="metric-val">100% Sanitation Pass</div>
+              <div class="metric-desc">Compliant with SERVSAFE and local health inspections</div>
+            </div>
+            <div class="example-content">
+              <p><strong>Scenario:</strong> Operating concession hot-holding stations and cold beverage dispensing units across prolonged 10-hour event days.</p>
+              <p><strong>Action:</strong> Monitored food warmers strictly at 65&deg;C+, utilized dedicated food tongs, implemented FIFO (First-In, First-Out) stock rotation, and enforced continuous 20-minute sanitation wiping cycles.</p>
+              <p><strong>Outcome:</strong> Zero food safety complaints and pristine scores on internal quality audits.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 6 -->
+        <div class="example-card">
+          <div>
+            <div class="example-icon-wrap"><i class="fa-solid fa-users"></i></div>
+            <span class="sub-tag">Team Collaboration</span>
+            <h3>Cross-Departmental Arena Crowd Flow Support</h3>
+            <div class="example-metric-box">
+              <div class="metric-val">100% Team Alignment</div>
+              <div class="metric-desc">Seamless synchronization with Security &amp; Floor Ushers</div>
+            </div>
+            <div class="example-content">
+              <p><strong>Scenario:</strong> Concourse congestion near Gate 3 threatening to block emergency exit aisles during event egress.</p>
+              <p><strong>Action:</strong> Proactively communicated with floor supervisors and security officers, redirected outgoing patron traffic politely, and cleared sales line barriers immediately after last call.</p>
+              <p><strong>Outcome:</strong> Ensured rapid, safe concourse evacuation while supporting fellow concession staff with end-of-night trash clearing.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Digital Receipt Modal -->
+  <div class="modal-overlay" id="receipt-modal">
+    <div class="receipt-card">
+      <div class="receipt-header">
+        <h3>MALL OF ASIA ARENA</h3>
+        <div style="font-size: 0.82rem; font-weight: 600;">Concessions &amp; Merchandise Outlet</div>
+        <div class="receipt-meta">
+          <div>PASAY CITY, METRO MANILA</div>
+          <div id="receipt-datetime">Date: 2026-10-14 19:45</div>
+          <div id="receipt-txid">Tx ID: TX-849201</div>
+          <div>Cashier: Jhay Anne Subia (EMP #4029)</div>
+        </div>
+      </div>
+
+      <table class="receipt-table">
+        <thead>
+          <tr style="border-bottom: 1px solid #cbd5e1; font-weight: 700;">
+            <td style="width: 50%;">Item</td>
+            <td class="num" style="width: 15%;">Qty</td>
+            <td class="num" style="width: 35%;">Amount</td>
+          </tr>
+        </thead>
+        <tbody id="receipt-body">
+          <!-- Filled by JS -->
+        </tbody>
+      </table>
+
+      <div class="receipt-totals">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+          <span>Subtotal:</span>
+          <span id="receipt-subtotal">&#8369;0.00</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+          <span>12% VAT Included:</span>
+          <span id="receipt-vat">&#8369;0.00</span>
+        </div>
+        <div class="bold-row" style="display: flex; justify-content: space-between; margin-top: 6px;">
+          <span>TOTAL DUE:</span>
+          <span id="receipt-total">&#8369;0.00</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 6px; color: var(--text-muted);">
+          <span id="receipt-paymethod">Cash Tendered:</span>
+          <span id="receipt-tendered">&#8369;0.00</span>
+        </div>
+        <div class="bold-row" style="display: flex; justify-content: space-between; margin-top: 4px; color: #065f46;">
+          <span>CHANGE:</span>
+          <span id="receipt-change">&#8369;0.00</span>
+        </div>
+      </div>
+
+      <div class="receipt-footer">
+        <div>*** THANK YOU FOR VISITING MOA ARENA! ***</div>
+        <div style="margin-top: 4px;">Served with Excellence by Jhay Anne Subia</div>
+      </div>
+
+      <div class="receipt-actions">
+        <button class="btn-receipt" onclick="printReceipt()">
+          <i class="fa-solid fa-print"></i> Print Receipt
+        </button>
+        <button class="btn-receipt primary" onclick="closeReceiptModal()">
+          <i class="fa-solid fa-check"></i> Next Customer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Jhay Anne D. Subia &bull; Hospitality &amp; Customer Service Specialist</p>
+      <p style="font-size: 0.8rem; margin-top: 6px;">
+        Designed to showcase practical expertise in POS operations, guest services, and arena hospitality management.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript Engine -->
+  <script>
+    /* ==========================================================
+       SOUND SYNTHESIZER (Web Audio API - No External Sound Files)
+       ========================================================== */
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playBeep(freq = 600, duration = 0.08, type = 'sine') {
+      try {
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        // Fallback silently if audio context is blocked
+      }
+    }
+
+    function playSuccessChime() {
+      playBeep(523.25, 0.08); // C5
+      setTimeout(() => playBeep(659.25, 0.08), 70); // E5
+      setTimeout(() => playBeep(783.99, 0.16), 140); // G5
+    }
+
+    /* ==========================================================
+       PRODUCT CATALOG & POS STATE
+       ========================================================== */
+    const products = [
+      { id: 1, name: "Arena Caramel Popcorn (L)", price: 180, category: "snacks", icon: "fa-solid fa-bowl-food", code: "SNK-01" },
+      { id: 2, name: "Loaded Cheese Nachos", price: 220, category: "snacks", icon: "fa-solid fa-cheese", code: "SNK-02" },
+      { id: 3, name: "Classic Beef Hotdog", price: 140, category: "snacks", icon: "fa-solid fa-hotdog", code: "SNK-03" },
+      { id: 4, name: "Mineral Water (500ml)", price: 60, category: "beverages", icon: "fa-solid fa-bottle-water", code: "BEV-01" },
+      { id: 5, name: "Caramel Iced Coffee", price: 150, category: "beverages", icon: "fa-solid fa-mug-hot", code: "BEV-02" },
+      { id: 6, name: "Chilled Green Tea", price: 90, category: "beverages", icon: "fa-solid fa-glass-water", code: "BEV-03" },
+      { id: 7, name: "Concert Tour T-Shirt", price: 650, category: "merch", icon: "fa-solid fa-shirt", code: "MRC-01" },
+      { id: 8, name: "Concert Glow Lightstick", price: 850, category: "merch", icon: "fa-solid fa-wand-magic-sparkles", code: "MRC-02" }
+    ];
+
+    let cart = [];
+    let activePayment = 'cash';
+    let shiftTotalSales = 0;
+    let shiftTxCount = 0;
+
+    // Render Products Grid
+    function renderProducts(filter = 'all') {
+      const container = document.getElementById('products-container');
+      container.innerHTML = '';
+
+      const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.onclick = () => addToCart(p.id);
+        card.innerHTML = `
+          <div>
+            <div class="prod-icon"><i class="${p.icon}"></i></div>
+            <div class="prod-name">${p.name}</div>
+            <div class="prod-code">${p.code}</div>
+          </div>
+          <div class="prod-price">&#8369;${p.price.toFixed(2)}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterCategory(cat) {
+      document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderProducts(cat);
+      playBeep(450, 0.05);
+    }
+
+    // Cart Management
+    function addToCart(productId) {
+      const prod = products.find(p => p.id === productId);
+      const existing = cart.find(item => item.id === productId);
+
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...prod, qty: 1 });
+      }
+
+      playBeep(700, 0.06);
+      updateCartDisplay();
+    }
+
+    function updateQty(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.id !== productId);
+      }
+      playBeep(550, 0.05);
+      updateCartDisplay();
+    }
+
+    function removeItem(productId) {
+      cart = cart.filter(i => i.id !== productId);
+      playBeep(400, 0.08);
+      updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+      const list = document.getElementById('cart-items-list');
+      
+      if (cart.length === 0) {
+        list.innerHTML = `
+          <div class="cart-empty">
+            <i class="fa-solid fa-basket-shopping"></i>
+            <p>Cart is currently empty.<br>Click any menu item to start order.</p>
+          </div>
+        `;
+        document.getElementById('bill-subtotal').innerHTML = '&#8369;0.00';
+        document.getElementById('bill-vat').innerHTML = '&#8369;0.00';
+        document.getElementById('bill-total').innerHTML = '&#8369;0.00';
+        document.getElementById('checkout-btn').disabled = true;
+        document.getElementById('change-alert-box').classList.remove('visible');
+        document.getElementById('cash-tendered-input').value = '';
+        return;
+      }
+
+      let subtotal = 0;
+      list.innerHTML = '';
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.qty;
+        subtotal += itemTotal;
+
+        const row = document.createElement('div');
+        row.className = 'cart-item';
+        row.innerHTML = `
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">&#8369;${item.price.toFixed(2)} each</div>
+          </div>
+          <div class="cart-qty-ctrl">
+            <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
+            <span style="font-weight: 700; font-size: 0.9rem; min-width: 18px; text-align: center;">${item.qty}</span>
+            <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+          </div>
+          <div class="cart-item-total">&#8369;${itemTotal.toFixed(2)}</div>
+          <button class="btn-remove" onclick="removeItem(${item.id})" title="Remove item">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        `;
+        list.appendChild(row);
+      });
+
+      const vat = subtotal * (12 / 112); // standard 12% inclusive VAT in Philippines
+      document.getElementById('bill-subtotal').innerHTML = `&#8369;${(subtotal - vat).toFixed(2)}`;
+      document.getElementById('bill-vat').innerHTML = `&#8369;${vat.toFixed(2)}`;
+      document.getElementById('bill-total').innerHTML = `&#8369;${subtotal.toFixed(2)}`;
+
+      calculateChange();
+    }
+
+    // Payment & Change Computation (Skill: Accuracy in Change Computation)
+    function selectPaymentMethod(method) {
+      activePayment = method;
+      document.querySelectorAll('.pay-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`pay-${method}-btn`).classList.add('active');
+
+      const cashPanel = document.getElementById('cash-panel');
+      if (method === 'cash') {
+        cashPanel.style.display = 'block';
+      } else {
+        cashPanel.style.display = 'none';
+        document.getElementById('change-alert-box').classList.remove('visible');
+      }
+
+      playBeep(600, 0.05);
+      calculateChange();
+    }
+
+    function setQuickCash(amount) {
+      const total = getCartTotal();
+      if (amount === 'exact') {
+        document.getElementById('cash-tendered-input').value = total.toFixed(2);
+      } else {
+        document.getElementById('cash-tendered-input').value = amount;
+      }
+      playBeep(650, 0.05);
+      calculateChange();
+    }
+
+    function getCartTotal() {
+      return cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    }
+
+    function calculateChange() {
+      const total = getCartTotal();
+      const checkoutBtn = document.getElementById('checkout-btn');
+
+      if (total === 0) {
+        checkoutBtn.disabled = true;
+        return;
+      }
+
+      if (activePayment !== 'cash') {
+        checkoutBtn.disabled = false;
+        return;
+      }
+
+      const tenderedInput = document.getElementById('cash-tendered-input').value;
+      const tendered = parseFloat(tenderedInput) || 0;
+      const changeBox = document.getElementById('change-alert-box');
+      const changeVal = document.getElementById('change-due-val');
+      const breakdownText = document.getElementById('change-bills-breakdown');
+      const cashStatus = document.getElementById('cash-status');
+
+      if (tendered >= total) {
+        const change = tendered - total;
+        changeVal.innerHTML = `&#8369;${change.toFixed(2)}`;
+        breakdownText.innerHTML = `Optimal Tender Breakdown: ${computeBillsBreakdown(change)}`;
+        changeBox.classList.add('visible');
+        cashStatus.innerHTML = '<span style="color: var(--success); font-weight: bold;">Sufficient Funds</span>';
+        checkoutBtn.disabled = false;
+      } else {
+        changeBox.classList.remove('visible');
+        const shortage = total - tendered;
+        cashStatus.innerHTML = `<span style="color: var(--danger);">Lacks &#8369;${shortage.toFixed(2)}</span>`;
+        checkoutBtn.disabled = true;
+      }
+    }
+
+    function computeBillsBreakdown(amount) {
+      if (amount <= 0) return "Exact amount given (No change needed)";
+      
+      const denominations = [
+        { name: "₱1,000 bill", val: 1000 },
+        { name: "₱500 bill", val: 500 },
+        { name: "₱200 bill", val: 200 },
+        { name: "₱100 bill", val: 100 },
+        { name: "₱50 bill", val: 50 },
+        { name: "₱20 coin", val: 20 },
+        { name: "₱10 coin", val: 10 },
+        { name: "₱5 coin", val: 5 },
+        { name: "₱1 coin", val: 1 }
+      ];
+
+      let remaining = Math.round(amount);
+      const parts = [];
+
+      for (const d of denominations) {
+        if (remaining >= d.val) {
+          const count = Math.floor(remaining / d.val);
+          parts.push(`${count}x ${d.name}`);
+          remaining %= d.val;
+        }
+      }
+
+      return parts.join(", ") || "No change";
+    }
+
+    // Checkout & Receipt Modal
+    function processCheckout() {
+      const total = getCartTotal();
+      if (total === 0) return;
+
+      const tendered = activePayment === 'cash' 
+        ? (parseFloat(document.getElementById('cash-tendered-input').value) || total)
+        : total;
+      const change = tendered - total;
+
+      // Update Shift Cash Drawer
+      shiftTotalSales += total;
+      shiftTxCount += 1;
+      updateReconciliation();
+
+      // Populate Receipt
+      const tbody = document.getElementById('receipt-body');
+      tbody.innerHTML = '';
+      cart.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.name}</td>
+          <td class="num">${item.qty}</td>
+          <td class="num">&#8369;${(item.price * item.qty).toFixed(2)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      const vat = total * (12 / 112);
+      document.getElementById('receipt-subtotal').innerHTML = `&#8369;${(total - vat).toFixed(2)}`;
+      document.getElementById('receipt-vat').innerHTML = `&#8369;${vat.toFixed(2)}`;
+      document.getElementById('receipt-total').innerHTML = `&#8369;${total.toFixed(2)}`;
+      
+      let payLabel = 'Cash Tendered:';
+      if (activePayment === 'card') payLabel = 'Card / Chip Tap:';
+      if (activePayment === 'qr') payLabel = 'GCash / Maya QR:';
+      
+      document.getElementById('receipt-paymethod').innerText = payLabel;
+      document.getElementById('receipt-tendered').innerHTML = `&#8369;${tendered.toFixed(2)}`;
+      document.getElementById('receipt-change').innerHTML = `&#8369;${change.toFixed(2)}`;
+
+      const now = new Date();
+      document.getElementById('receipt-datetime').innerText = `Date: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+      document.getElementById('receipt-txid').innerText = `Tx ID: TX-${Math.floor(100000 + Math.random() * 900000)}`;
+
+      playSuccessChime();
+      document.getElementById('receipt-modal').classList.add('active');
+    }
+
+    function closeReceiptModal() {
+      document.getElementById('receipt-modal').classList.remove('active');
+      cart = [];
+      document.getElementById('cash-tendered-input').value = '';
+      updateCartDisplay();
+    }
+
+    function printReceipt() {
+      window.print();
+    }
+
+    // Shift Cash Reconciliation Logic
+    function updateReconciliation() {
+      document.getElementById('recon-sales').innerHTML = `&#8369;${shiftTotalSales.toFixed(2)}`;
+      document.getElementById('recon-txCount') ? document.getElementById('recon-txCount').innerText = `${shiftTxCount} Completed transactions` : null;
+      document.getElementById('recon-tx-count').innerText = `${shiftTxCount} Completed transactions`;
+
+      const openingFloat = 2000;
+      const expectedTotal = openingFloat + shiftTotalSales;
+      document.getElementById('recon-expected').innerHTML = `&#8369;${expectedTotal.toFixed(2)}`;
+      
+      const badge = document.getElementById('recon-badge');
+      badge.className = 'recon-status-badge recon-balanced';
+      badge.innerHTML = `<i class="fa-solid fa-check-circle"></i> Balanced (Variance: &#8369;0.00)`;
+    }
+
+    function resetDrawer() {
+      shiftTotalSales = 0;
+      shiftTxCount = 0;
+      updateReconciliation();
+      playBeep(400, 0.1);
+    }
+
+    // Clock
+    setInterval(() => {
+      const el = document.getElementById('clock-display');
+      if (el) el.innerText = new Date().toLocaleTimeString();
+    }, 1000);
+
+    /* ==========================================================
+       TAB 2: CUSTOMER SERVICE SCENARIO ENGINE
+       ========================================================== */
+    const scenarios = [
+      {
+        id: 1,
+        title: "The 10-Minute Concert Intermission Rush",
+        tag: "Customer Service & Multitasking",
+        difficulty: "High Velocity",
+        prompt: "A patron is anxiously checking their watch as the 10-minute concert intermission ends. The Loaded Cheese Nachos they ordered just sold out. How do you resolve this?",
+        context: "MOA Arena concourse has over 12,000 spectators. Line behind the patron is 15 people long.",
+        options: [
+          {
+            key: "A",
+            text: "Apologize politely, acknowledge their hurry, and offer a delicious hot alternative immediately: 'I apologize, our warm nachos just ran out! I can hand you our fresh Classic Beef Hotdog or Large Popcorn right now in under 15 seconds so you won't miss the song!'",
+            correct: true,
+            feedback: "Outstanding hospitality! You used active listening, validated their time anxiety, and offered an instant hot alternative that avoided line delay and preserved guest goodwill."
+          },
+          {
+            key: "B",
+            text: "Shrug and tell them: 'We're out of nachos. You will have to go down to Section 108 to see if their stall still has stock.'",
+            correct: false,
+            feedback: "Unacceptable service. Dismissing a customer without solutions during intermission guarantees dissatisfaction and negative arena feedback."
+          },
+          {
+            key: "C",
+            text: "Leave your register unattended and run to the backroom storage warehouse to search for unprocessed nacho chips.",
+            correct: false,
+            feedback: "Violates time management and team protocols. Leaving an active line stalls 15 waiting guests and causes bottleneck chaos."
+          }
+        ]
+      },
+      {
+        id: 2,
+        title: "Declined Card Payment During High Volume Rush",
+        tag: "POS Operations & Tactful De-escalation",
+        difficulty: "Discretion & Empathy",
+        prompt: "A guest's contactless credit card fails with an error: 'Transaction Declined / Communication Error'. The line behind is watching. How do you handle this with discretion?",
+        context: "Arena championship finals with high ambient noise and excited fans.",
+        options: [
+          {
+            key: "A",
+            text: "Loudly announce across the counter: 'Card declined! Do you have another card with actual money?'",
+            correct: false,
+            feedback: "Severe hospitality failure. Publicly embarrassing a customer damages dignity and breaches professional customer care guidelines."
+          },
+          {
+            key: "B",
+            text: "Lean in discreetly and speak calmly: 'It looks like the bank terminal timed out on the connection. Would you like to tap it once more, or do you prefer GCash, Maya, or cash so we can get your snacks ready right away?'",
+            correct: true,
+            feedback: "Perfect tact! Attributing the issue neutrally to the terminal protects the guest's dignity and smoothly offers alternative digital/cash payment paths."
+          },
+          {
+            key: "C",
+            text: "Cancel their entire order instantly and call for armed arena security to escort them away.",
+            correct: false,
+            feedback: "Gross overreaction that escalates a simple payment connectivity glitch into an unnecessary scene."
+          }
+        ]
+      },
+      {
+        id: 3,
+        title: "Beverage Spill Near the Concession Queue",
+        tag: "F&B Hygiene & Hazard Prevention",
+        difficulty: "Safety Standard",
+        prompt: "A customer rushing to their seat accidentally knocks over a 500ml soda right in front of your queue barrier, creating an immediate slip hazard.",
+        context: "High foot-traffic tile concourse during ingress.",
+        options: [
+          {
+            key: "A",
+            text: "Immediately place a high-visibility yellow 'Caution: Wet Floor' cone, signal the designated concourse janitorial runner via radio/hand-signal, and guide guests 1 step around the spill while continuing orders.",
+            correct: true,
+            feedback: "Exemplary standard! Balances guest safety, hazard prevention (TESDA housekeeping/safety protocols), and queue continuity without stopping the business."
+          },
+          {
+            key: "B",
+            text: "Ignore the puddle and wait until the event finishes 3 hours later to clean it.",
+            correct: false,
+            feedback: "Severe hazard liability. Slips and falls on wet arena floors cause injuries and liability claims."
+          },
+          {
+            key: "C",
+            text: "Berate the customer who dropped the beverage and refuse to serve anyone until they mop it themselves.",
+            correct: false,
+            feedback: "Unprofessional and counter-productive. Accidents happen in busy arenas; hospitality staff handle hazards calmly."
+          }
+        ]
+      },
+      {
+        id: 4,
+        title: "Food Allergies & Ingredient Inquiries",
+        tag: "Hospitality & Food Safety (NCIII)",
+        difficulty: "Dietary Compliance",
+        prompt: "A mother ordering snacks for her child asks if the arena caramel popcorn contains dairy or was prepared in a facility with peanuts.",
+        context: "SERVSAFE Food Safety & Allergy Disclosure Protocol.",
+        options: [
+          {
+            key: "A",
+            text: "Guess confidently: 'It looks fine to me, probably has zero peanuts so you should be okay.'",
+            correct: false,
+            feedback: "Dangerous breach of SERVSAFE protocols. Guessing food allergens can cause life-threatening anaphylactic reactions."
+          },
+          {
+            key: "B",
+            text: "Consult the official concession ingredient binder immediately, provide verified manufacturer allergen statements, and offer sealed factory-packaged snacks if cross-contact cannot be 100% ruled out.",
+            correct: true,
+            feedback: "Superior food safety protocol! Verified documentation protects customer health and reflects professional TESDA NCIII food safety training."
+          },
+          {
+            key: "C",
+            text: "Tell the mother that questions about food ingredients are not allowed during concert hours.",
+            correct: false,
+            feedback: "Hostile and dangerous customer service violation."
+          }
+        ]
+      }
+    ];
+
+    let userAnswers = {};
+
+    function renderScenarios() {
+      const list = document.getElementById('scenarios-list');
+      list.innerHTML = '';
+
+      scenarios.forEach((sc, index) => {
+        const card = document.createElement('div');
+        card.className = 'scenario-card';
+        card.id = `scenario-card-${sc.id}`;
+
+        let optionsHtml = '';
+        sc.options.forEach((opt, optIdx) => {
+          optionsHtml += `
+            <button class="option-btn" id="opt-btn-${sc.id}-${opt.key}" onclick="selectScenarioOption(${sc.id}, '${opt.key}')">
+              <span class="option-key">${opt.key}</span>
+              <div>${opt.text}</div>
+            </button>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="scenario-header">
+            <div>
+              <span class="scenario-tag">${sc.tag}</span>
+              <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--secondary); margin-top: 6px;">
+                Scenario ${index + 1}: ${sc.title}
+              </h3>
+            </div>
+            <span class="scenario-difficulty">${sc.difficulty}</span>
+          </div>
+          <div class="scenario-context"><i class="fa-solid fa-circle-info"></i> <strong>Setting:</strong> ${sc.context}</div>
+          <div class="scenario-prompt">${sc.prompt}</div>
+          <div class="options-list">
+            ${optionsHtml}
+          </div>
+          <div class="scenario-feedback" id="feedback-${sc.id}"></div>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    function selectScenarioOption(scenarioId, key) {
+      const sc = scenarios.find(s => s.id === scenarioId);
+      const chosen = sc.options.find(o => o.key === key);
+      userAnswers[scenarioId] = chosen.correct;
+
+      // Disable buttons for this scenario
+      sc.options.forEach(opt => {
+        const btn = document.getElementById(`opt-btn-${scenarioId}-${opt.key}`);
+        btn.disabled = true;
+        if (opt.correct) {
+          btn.classList.add('correct');
+        } else if (opt.key === key) {
+          btn.classList.add('wrong');
+        }
+      });
+
+      const fb = document.getElementById(`feedback-${scenarioId}`);
+      fb.className = `scenario-feedback visible ${chosen.correct ? 'feedback-correct' : 'feedback-wrong'}`;
+      fb.innerHTML = `
+        <strong>${chosen.correct ? '<i class="fa-solid fa-circle-check"></i> Standard Met!' : '<i class="fa-solid fa-triangle-exclamation"></i> Learning Opportunity:'}</strong>
+        <p style="margin-top: 6px;">${chosen.feedback}</p>
+      `;
+
+      if (chosen.correct) {
+        playSuccessChime();
+      } else {
+        playBeep(300, 0.2, 'triangle');
+      }
+
+      updateCsatScorecard();
+    }
+
+    function updateCsatScorecard() {
+      const totalAnswered = Object.keys(userAnswers).length;
+      if (totalAnswered === 0) return;
+
+      const correctCount = Object.values(userAnswers).filter(Boolean).length;
+      const scorePercent = Math.round((correctCount / totalAnswered) * 100);
+
+      document.getElementById('csat-score').innerText = `${scorePercent}%`;
+      document.getElementById('guest-smiles').innerText = `${correctCount} / ${totalAnswered}`;
+
+      const badge = document.getElementById('service-badge');
+      if (scorePercent === 100) {
+        badge.innerText = "EXCELLENT";
+        badge.style.color = "var(--success)";
+      } else if (scorePercent >= 75) {
+        badge.innerText = "PROFICIENT";
+        badge.style.color = "var(--primary)";
+      } else {
+        badge.innerText = "NEEDS COACHING";
+        badge.style.color = "var(--danger)";
+      }
+    }
+
+    /* ==========================================================
+       TAB 3: F&B SAFETY AUDIT CHECKLIST
+       ========================================================== */
+    const auditItems = [
+      { id: 1, standard: "Food Holding Temperature Verification", protocol: "Hot foods held at 60°C+ (140°F) in display warmers; cold beverages maintained below 4°C (40°F).", cert: "SERVSAFE Protocol" },
+      { id: 2, standard: "Sanitary Barrier & Utensil Usage", protocol: "Stainless steel food tongs and disposable food-grade gloves used for all ready-to-eat bakery and hotdog items.", cert: "TESDA NCIII Standard" },
+      { id: 3, standard: "Cross-Contamination Prevention", protocol: "Distinct cutting boards and sanitizing rags segregated between beverage counters and food preparation blocks.", cert: "Food Hygiene Act" },
+      { id: 4, standard: "First-In, First-Out (FIFO) Rotation", protocol: "New inventory placed behind older stock with clear expiry labeling to prevent product spoilage.", cert: "Inventory Standards" },
+      { id: 5, standard: "Hand Washing & Personal Hygiene", protocol: "Thorough 20-second hand washing completed before clocking in, after breaks, and upon handling cash transactions.", cert: "Health Certification" },
+      { id: 6, standard: "Counter Surface Sanitization", protocol: "Customer order counters and POS screens disinfected every 30 minutes with approved food-contact sanitizing solution.", cert: "Housekeeping NCII" }
+    ];
+
+    function renderAuditChecklist() {
+      const container = document.getElementById('audit-checklist-container');
+      container.innerHTML = '';
+
+      auditItems.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'audit-item';
+        div.onclick = (e) => {
+          if (e.target.tagName !== 'INPUT') {
+            const cb = div.querySelector('input');
+            cb.checked = !cb.checked;
+            updateAuditScore();
+          }
+        };
+        div.innerHTML = `
+          <div class="audit-info">
+            <input type="checkbox" class="audit-checkbox" checked onchange="updateAuditScore()">
+            <div class="audit-text">
+              <div class="standard">${item.standard}</div>
+              <div class="protocol">${item.protocol}</div>
+            </div>
+          </div>
+          <span class="audit-badge">${item.cert}</span>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function updateAuditScore() {
+      const checkboxes = document.querySelectorAll('.audit-checkbox');
+      const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+      const pct = Math.round((checked / checkboxes.length) * 100);
+      document.getElementById('audit-score').innerText = `${pct}%`;
+      playBeep(650, 0.05);
+    }
+
+    /* ==========================================================
+       TAB NAVIGATION
+       ========================================================== */
+    function switchTab(tabKey) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      event.currentTarget.classList.add('active');
+      document.getElementById(`tab-${tabKey}`).classList.add('active');
+
+      playBeep(520, 0.06);
+      window.scrollTo({ top: 120, behavior: 'smooth' });
+    }
+
+    // Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      renderProducts('all');
+      renderScenarios();
+      renderAuditChecklist();
+      updateCartDisplay();
+      updateReconciliation();
+    });
+  </script>
+</body>
+</html>
